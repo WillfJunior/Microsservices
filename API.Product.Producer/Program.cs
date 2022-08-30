@@ -37,9 +37,9 @@ app.UseHttpsRedirection();
 
 
 
-app.MapGet("/product", async(Product product, IBus _bus) =>
+app.MapPost("/product", async(Product product, IBus _bus) =>
 {
-    var uri = new Uri("rabbit://localhost:5672/produtc");
+    var uri = new Uri("rabbitmq://localhost/product");
     var endpoint = await _bus.GetSendEndpoint(uri);
     await endpoint.Send(product);
 
